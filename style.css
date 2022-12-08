@@ -1,0 +1,42 @@
+.modal-body{
+  display: flex;
+  flex-direction: column;
+}
+
+.modal_create{
+  margin-bottom: 1rem;
+}
+
+#insta_avatar{
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+#insta_nick{
+  font-weight: 600;
+}
+
+#insta_like{
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-right: 1rem;
+}
+
+#insta_repost{
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 1rem;
+}
+
+#insta_comment{
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 1rem;
+}
+
+#insta_save{
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 1rem;
+}
