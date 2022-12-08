@@ -55,10 +55,10 @@ async function render() {
     let newElem = document.createElement("div");
 
     newElem.innerHTML = `
-    <div class="mb-3 card" style="width: 25rem">
-    <div class = 'm-1'>
+    <div class="mb-3 card" style="width: 27rem">
+    <div class = 'mt-2 mb-3 ms-2'>
     <img id = 'insta_avatar' src = 'https://images.pexels.com/photos/6055975/pexels-photo-6055975.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'>
-    <span id = insta_nick class = 'ms-1'>add_code<span>
+    <span id = insta_nick class = 'ms-2'>add_code<span>
     </div>
   
   <img src="${data.img}" class="card-img-top" alt="...">
