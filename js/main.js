@@ -17,15 +17,16 @@ const list = document.querySelector("#profile-list");
 // ! вытаскиваем кнопки points, редактировать и удалить
 const btnModalPoints = document.querySelector("#card_points");
 
-const btnDelete = document.querySelector("points_delete");
-
 const btnEdit = document.querySelector("#btn-edit");
 
-//! вытаскиваем инпуты редактирования 
+//! вытаскиваем инпуты редактирования
 
 const editDesc = document.querySelector("#edit_inp_desc");
 
 const editImg = document.querySelector("#edit_inp_img");
+
+// !вытаскиваем кнопку для удаления
+const btnDelete = document.querySelector("#btn-delete");
 
 //! функция создания
 
@@ -121,38 +122,38 @@ document.addEventListener("click", function (e) {
     fetch(`${API}/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        editDesc.value = data.desc
-        editImg.value = data.img
+        editDesc.value = data.desc;
+        editImg.value = data.img;
 
-        btnEdit.setAttribute('id', data.id)
+        btnEdit.setAttribute("id", data.id);
       });
   }
 });
 
-btnEdit.addEventListener('click', async function(){
-  let id = this.id
+btnEdit.addEventListener("click", async function () {
+  let id = this.id;
 
-  let desc = editDesc.value
-  let img = editImg.value
+  let desc = editDesc.value;
+  let img = editImg.value;
 
-if(!desc || !img) return
+  if (!desc || !img) return;
 
-let editedObj = {
-  desc: desc,
-  img: img
-}
-saveEdit(editedObj, id)
-})
+  let editedObj = {
+    desc: desc,
+    img: img,
+  };
+  saveEdit(editedObj, id);
+});
 
-async function saveEdit(editedObj, id){
+async function saveEdit(editedObj, id) {
   await fetch(`${API}/${id}`, {
-    method: 'PATCH',
+    method: "PATCH",
     headers: {
-      'Content-Type': 'application/json; charset=utf-8'
+      "Content-Type": "application/json; charset=utf-8",
     },
-    body: JSON.stringify(editedObj)
-  })
-  render()
+    body: JSON.stringify(editedObj),
+  });
+  render();
   let modal = bootstrap.Modal.getInstance(editModal);
   modal.hide();
 }
