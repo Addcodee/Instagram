@@ -1,58 +1,57 @@
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-body{
+body {
   background-color: rgba(241, 241, 241, 0.434);
 }
 
-.modal-body{
+.modal-body {
   display: flex;
   flex-direction: column;
 }
 
-.modal_create{
+.modal_create {
   margin-bottom: 1rem;
 }
 
-#insta_avatar{
+#insta_avatar {
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
 }
 
-#insta_nick{
+#insta_nick {
   font-weight: 600;
 }
 
-#insta_like{
+#insta_like {
   width: 1.7rem;
   height: 1.7rem;
   margin-right: 1rem;
 }
 
-#insta_repost{
+#insta_repost {
   width: 1.5rem;
   height: 1.5rem;
   margin-right: 1rem;
 }
 
-#insta_comment{
+#insta_comment {
   width: 1.5rem;
   height: 1.5rem;
   margin-right: 1rem;
 }
 
-#insta_save{
+#insta_save {
   width: 1.5rem;
   height: 1.5rem;
   margin-left: 1rem;
 }
 
-
-.side-navbar{
+.side-navbar {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -63,21 +62,21 @@ body{
   border-right: 0.01rem solid rgba(0, 0, 0, 0.185);
 }
 
-.sidebar_logo{
+.sidebar_logo {
   width: 7rem;
   height: 4;
   margin-left: 1.5rem;
 }
 
-.sidebar_btns{
+.sidebar_btns {
   width: 100%;
   height: 80%;
 }
 
-.btn_log-out{
+.btn_log-out {
   height: 5%;
 }
-.sidebar_btn{
+.sidebar_btn {
   margin-bottom: 2rem;
   border: none;
   background-color: white;
@@ -87,31 +86,31 @@ body{
   text-align: start;
   margin-left: 1.5rem;
 }
-.sidebar_btn:hover{
+.sidebar_btn:hover {
   background-color: rgba(183, 183, 183, 0.062);
   border-radius: 1rem;
 }
 
-.sidebar_icon{
+.sidebar_icon {
   width: 1.5rem;
   height: 1.5rem;
   margin-right: 0.8rem;
   transition: 0.1s;
-} 
+}
 
-#sidebar_avatar{
+#sidebar_avatar {
   border-radius: 50%;
 }
 
-#btn_log-out{
+#btn_log-out {
   margin-bottom: 0;
 }
 
-#btn_log-out:hover{
+#btn_log-out:hover {
   background-color: transparent;
 }
 
-.cont_story{
+.cont_story {
   width: 27rem;
   height: 6rem;
   border: 1px solid rgba(0, 0, 0, 0.231);
@@ -119,4 +118,25 @@ body{
   margin-top: 2rem;
   border-radius: 0.5rem;
   background-color: white;
+}
+#card_points {
+  border: none;
+  background-color: white;
+  font-size: 1.5rem;
+}
+.points-btn {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.144);
+  background-color: white;
+  width: 100%;
+  padding: 0.6rem 0.6rem;
+  font-size: 0.8rem;
+}
+#edit_modal-cont {
+  border-radius: 1rem;
+}
+
+#points_delete {
+  color: #ed4956;
+  font-weight: 700;
 }
