@@ -67,6 +67,7 @@ body{
   width: 7rem;
   height: 4;
   margin-left: 1.5rem;
+  cursor: pointer;
 }
 
 .sidebar_btns{
@@ -114,9 +115,15 @@ body{
 .cont_story{
   width: 27rem;
   height: 6rem;
-  border: 1px solid rgba(0, 0, 0, 0.231);
+  border: 1px solid rgba(0, 0, 0, 0.126);
   margin-bottom: 2rem;
   margin-top: 2rem;
   border-radius: 0.5rem;
   background-color: white;
+}
+
+.container{
+  display: flex;
+  justify-content: end;
+  position: absolute;
 }
