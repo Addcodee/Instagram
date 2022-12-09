@@ -1,4 +1,4 @@
-const API = "http://localhost:8000/profile";
+const API = "http://localhost:8000/insta-data";
 
 //! Вытаскиваем инпуты создания поста
 
@@ -13,6 +13,11 @@ const btnAdd = document.querySelector("#btn-create");
 //! вытаскиванм блок profile
 
 const list = document.querySelector("#profile-list");
+
+// ! вытаскиваем кнопки points, редактировать и удалить
+const btnModalPoints = document.querySelector("#card_points");
+const btnEdit = document.querySelector("#points_edit");
+const btnDelete = document.querySelector("points_delete");
 
 //! функция создания
 
@@ -56,9 +61,12 @@ async function render() {
 
     newElem.innerHTML = `
     <div class="mb-3 card" style="width: 27rem">
-    <div class = 'mt-2 mb-3 ms-2'>
+    <div class = 'mt-2 mb-2 ms-2 d-flex justify-content-between'>
+    <div>
     <img id = 'insta_avatar' src = 'https://images.pexels.com/photos/6055975/pexels-photo-6055975.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'>
     <span id = insta_nick class = 'ms-2'>add_code<span>
+    </div>
+    <button id= "card_points" class= 'me-2' data-bs-toggle="modal" data-bs-target="#editModal">...</button>
     </div>
   
   <img src="${data.img}" class="card-img-top" alt="...">
