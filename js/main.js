@@ -16,8 +16,16 @@ const list = document.querySelector("#profile-list");
 
 // ! вытаскиваем кнопки points, редактировать и удалить
 const btnModalPoints = document.querySelector("#card_points");
-const btnEdit = document.querySelector("#points_edit");
+
 const btnDelete = document.querySelector("points_delete");
+
+const btnEdit = document.querySelector("#btn-edit");
+
+//! вытаскиваем инпуты редактирования 
+
+const editDesc = document.querySelector("#edit_inp_desc");
+
+const editImg = document.querySelector("#edit_inp_img");
 
 //! функция создания
 
@@ -33,7 +41,7 @@ btnAdd.addEventListener("click", function (e) {
   desc.value = "";
   img.value = "";
 
-  let modal = bootstrap.Modal.getInstance(exampleModal);
+  let modal = bootstrap.Modal.getInstance(addModal);
   modal.hide();
 
   createPost(obj);
@@ -49,7 +57,10 @@ async function createPost(obj) {
   });
   render();
 }
+
 render();
+
+//! функция чтения
 
 async function render() {
   let profile = await fetch(API).then((res) => res.json());
@@ -66,7 +77,7 @@ async function render() {
     <img id = 'insta_avatar' src = 'https://images.pexels.com/photos/6055975/pexels-photo-6055975.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'>
     <span id = insta_nick class = 'ms-2'>add_code<span>
     </div>
-    <button id= "card_points" class= 'me-2' data-bs-toggle="modal" data-bs-target="#editModal">...</button>
+    <button id= ${data.id} class= 'me-2 card_points' data-bs-toggle="modal" data-bs-target="#point_modal">...</button>
     </div>
   
   <img src="${data.img}" class="card-img-top" alt="...">
@@ -92,6 +103,7 @@ async function render() {
   
   
   </div>
+
     <p class="card-title">${data.desc}</p>
   </div>
   
@@ -99,4 +111,48 @@ async function render() {
     `;
     list.append(newElem);
   });
+}
+
+//! функция редактирования
+
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("card_points")) {
+    let id = e.target.id;
+    fetch(`${API}/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        editDesc.value = data.desc
+        editImg.value = data.img
+
+        btnEdit.setAttribute('id', data.id)
+      });
+  }
+});
+
+btnEdit.addEventListener('click', async function(){
+  let id = this.id
+
+  let desc = editDesc.value
+  let img = editImg.value
+
+if(!desc || !img) return
+
+let editedObj = {
+  desc: desc,
+  img: img
+}
+saveEdit(editedObj, id)
+})
+
+async function saveEdit(editedObj, id){
+  await fetch(`${API}/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8'
+    },
+    body: JSON.stringify(editedObj)
+  })
+  render()
+  let modal = bootstrap.Modal.getInstance(editModal);
+  modal.hide();
 }

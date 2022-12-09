@@ -112,21 +112,31 @@ body {
 }
 
 .cont_story {
+  display: flex;
   width: 27rem;
-  height: 6rem;
-  border: 1px solid rgba(0, 0, 0, 0.126);
+  height: 7.5rem;
+  border: 0.1rem solid rgba(0, 0, 0, 0.126);
   margin-bottom: 2rem;
   margin-top: 2rem;
   border-radius: 0.5rem;
   background-color: white;
 }
 
-.container{
-  display: flex;
-  justify-content: end;
-  position: absolute;
+.story_ava{
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 50%;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  border: 0.15rem solid rgba(0, 0, 0, 0.167);
 }
-#card_points {
+
+.story_nick{
+  margin-left: 1.7rem;
+  font-size: 0.9rem;
+}
+
+.card_points {
   border: none;
   background-color: white;
   font-size: 1.5rem;
@@ -136,14 +146,40 @@ body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.144);
   background-color: white;
   width: 100%;
-  padding: 0.6rem 0.6rem;
-  font-size: 0.8rem;
-}
-#edit_modal-cont {
-  border-radius: 1rem;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
 }
 
 #points_delete {
   color: #ed4956;
   font-weight: 700;
+}
+
+#points_delete{
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+#points_cancel{
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.modal-content{
+  border-radius: 1rem;
+}
+.modal-dialog{
+  width: 28%;
+}
+.modal{
+  margin-top: 15%;
+}
+#file{
+  display: flex;
+  justify-content: end;
+}
+#upload_file{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
