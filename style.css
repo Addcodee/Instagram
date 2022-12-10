@@ -27,7 +27,7 @@ body {
   font-weight: 600;
 }
 
-#insta_like {
+.likeBtn {
   width: 1.7rem;
   height: 1.7rem;
   margin-right: 1rem;
@@ -107,8 +107,8 @@ body {
   margin-bottom: 0;
 }
 
-#btn_log-out:hover {
-  background-color: transparent;
+#btn_main{
+  margin-bottom: 1.5rem;
 }
 
 .cont_story {
@@ -182,4 +182,16 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.search{
+  width: 94%;
+  height: 5%;
+}
+.search:hover{
+  background-color: rgba(183, 183, 183, 0.062);
+  border-radius: 1rem;
+}
+
+.post_likes{
+  font-weight: 600;
 }
