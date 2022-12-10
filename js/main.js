@@ -14,6 +14,7 @@ const btnAdd = document.querySelector("#btn-create");
 
 const list = document.querySelector("#profile-list");
 
+
 // ! вытаскиваем кнопки points, редактировать и удалить
 const btnModalPoints = document.querySelector("#card_points");
 
@@ -27,6 +28,27 @@ const editImg = document.querySelector("#edit_inp_img");
 
 // !вытаскиваем кнопку для удаления
 const btnDelete = document.querySelector("#btn-delete");
+
+// ! вытаскиваем инпут для поиска
+
+const inpSearch = document.querySelector("#btn_search");
+
+let searchVal = "";
+
+let count = 0
+// ! вытаскиваем кнопки пагинации и создаем переменные для страниц
+
+let currentPage = 1;
+
+let pageTotalCount = 1;
+
+let paginationList = document.querySelector(".pagination-list");
+
+let prev = document.querySelector(".prev");
+
+let next = document.querySelector(".next");
+
+
 
 //! функция создания
 
@@ -44,7 +66,7 @@ btnAdd.addEventListener("click", function (e) {
 
   let modal = bootstrap.Modal.getInstance(addModal);
   modal.hide();
-
+  
   createPost(obj);
 });
 
@@ -62,9 +84,12 @@ async function createPost(obj) {
 render();
 
 //! функция чтения
-
-async function render() {
-  let profile = await fetch(API).then((res) => res.json());
+async function render(page) {
+  page = page || currentPage
+  let profile = await fetch(
+    `${API}?q=${searchVal}&_page=${page}&_limit=2`
+  ).then((res) => res.json());
+  drawPaginationButtons();
 
   list.innerHTML = "";
 
@@ -84,16 +109,17 @@ async function render() {
   <img src="${data.img}" class="card-img-top" alt="...">
   
   
-  
+
   <div class="card-body">
   
   
   
   <div class = 'd-flex justify-content-between'>
   
-  <div class = 'mb-4'>
-  
-  <img id = 'insta_like' src = 'https://cdn-icons-png.flaticon.com/512/1077/1077035.png'>
+  <div class = 'mb-3 d-flex '>
+
+  <img class = likeBtn id = '${data.id}' src ='https://cdn-icons-png.flaticon.com/512/1077/1077035.png'>
+
   <img id = 'insta_comment' src = 'https://cdn-icons-png.flaticon.com/128/5948/5948565.png'>
   <img id = 'insta_repost' src = 'https://cdn-icons-png.flaticon.com/128/3024/3024593.png'>
   </div>
@@ -105,6 +131,8 @@ async function render() {
   
   </div>
 
+  <p class = 'post_likes'>${count} отметок нравится</p>
+
     <p class="card-title">${data.desc}</p>
   </div>
   
@@ -112,7 +140,22 @@ async function render() {
     `;
     list.append(newElem);
   });
+  
 }
+
+
+// ! Счетчик лайков
+
+
+
+document.addEventListener('click', function(e){
+  if(e.target.classList.contains('likeBtn')){
+    count++
+    render()
+  }
+})
+
+
 
 //! функция редактирования
 
@@ -157,3 +200,91 @@ async function saveEdit(editedObj, id) {
   let modal = bootstrap.Modal.getInstance(editModal);
   modal.hide();
 }
+
+// ! функция удаления
+
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("card_points")) {
+    let id = e.target.id;
+    fetch(`${API}/${id}`)
+      .then((res) => res.json())
+      .then((data) => btnDelete.setAttribute("id", data.id));
+  }
+});
+btnDelete.addEventListener("click", async function () {
+  let id = this.id;
+  await fetch(`${API}/${id}`, {
+    method: "DELETE",
+  });
+  render();
+  let modal = bootstrap.Modal.getInstance(warningModal);
+  modal.hide();
+});
+
+// ! функция search
+
+inpSearch.addEventListener("input", () => {
+  if (inpSearch.value.trim() === "") {
+    searchVal = searchInp.value;
+    render();
+    return;
+  }
+  searchVal = inpSearch.value;
+  render(1);
+});
+
+//! функция пагинация
+async function drawPaginationButtons() {
+  fetch(`${API}?q=${searchVal}`)
+  .then((res) => res.json())
+  .then((data) => {
+    pageTotalCount = Math.ceil(data.length / 2);
+  });
+  paginationList.innerHTML = "";
+  
+  for (let i = 1; i <= pageTotalCount; i++) {
+    if (currentPage == i) {
+      let page1 = document.createElement("li");
+      page1.innerHTML = `<li class="page-item active"><a class="page-link" href="#">${i}</a></li>`;
+      paginationList.append(page1);
+    } else {
+      let page1 = document.createElement("li");
+      page1.innerHTML = `<li class="page-item"><a class="page-link page_number" href="#">${i}</a></li>`;
+      paginationList.append(page1);
+    }
+  }
+}
+
+if (currentPage == 1) {
+  prev.classList.toggle("disabled");
+}
+
+if (currentPage == pageTotalCount) {
+  next.classList.toggle("disabled");
+}
+
+
+prev.addEventListener('click', () => {
+  if(currentPage <=1){
+    return
+  }
+  currentPage--
+  render()
+})
+
+next.addEventListener('click', () => {
+  
+  if(currentPage >= pageTotalCount){
+    return
+  }
+  currentPage++
+  render()
+})
+
+document.addEventListener('click', function(e){
+  if (e.target.classList.contains('page_number')){
+    currentPage = e.target.innerText
+    render()
+  }
+})
+
